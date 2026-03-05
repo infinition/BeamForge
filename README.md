@@ -3,7 +3,7 @@
 [![Rust](https://img.shields.io/badge/Rust-1.70%2B-orange?logo=rust)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
 
-**BeamForge** (formerly NeoGenesis) is an experimental text generation engine coded in Rust from scratch. Unlike modern LLMs that use extremely demanding deep neural networks, BeamForge relies on a stochastic semantic graph coupled with a **Beam Search** algorithm.
+**BeamForge**  is an experimental text generation engine coded in Rust from scratch. Unlike modern LLMs that use extremely demanding deep neural networks, BeamForge relies on a stochastic semantic graph coupled with a **Beam Search** algorithm.
 
 It is designed to be ultra-fast, lightweight in memory (thanks to its native tokenization), and capable of **continuous real-time learning** (Online Learning).
 
