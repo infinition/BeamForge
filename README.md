@@ -5,6 +5,7 @@
 
 **BeamForge**  is an experimental text generation engine coded in Rust from scratch. Unlike modern LLMs that use extremely demanding deep neural networks, BeamForge relies on a stochastic semantic graph coupled with a **Beam Search** algorithm.
 
+ 
 It is designed to be ultra-fast, lightweight in memory (thanks to its native tokenization), and capable of **continuous real-time learning** (Online Learning).
 
 
