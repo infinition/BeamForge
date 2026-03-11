@@ -7,6 +7,7 @@
 
 It is designed to be ultra-fast, lightweight in memory (thanks to its native tokenization), and capable of **continuous real-time learning** (Online Learning).
 
+
 ## Key Features
 
 * **Native Tokenization (`u32`)**: Raw text is converted into numeric identifiers. During generation, the model clones arrays of integers (`Vec<u32>`) rather than strings, ensuring maximum CPU and RAM performance.
