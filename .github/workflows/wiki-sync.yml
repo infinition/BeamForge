@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'wiki/**'
-      - '.github/acidwiki.json'      # <-- Surveille ton fichier JSON auto-généré
+      - '.github/acidwiki.json'     
       - '.github/workflows/wiki-sync.yml'
   
   workflow_dispatch:
@@ -14,7 +14,7 @@ on:
     - cron: '0 4 * * *'
 
 permissions:
-  contents: write   # OBLIGATOIRE : Autorise le workflow maître à te renvoyer le .json
+  contents: write  
   pages: write
   id-token: write
 
