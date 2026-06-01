@@ -1,75 +1,96 @@
-﻿# BeamForge: Tokenized Beam Search Cognitive Engine 
+# BeamForge
 
-[![Rust](https://img.shields.io/badge/Rust-1.70%2B-orange?logo=rust)](https://www.rust-lang.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) ![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/infinition)
 
-**BeamForge**  is an experimental text generation engine coded in Rust from scratch. Unlike modern LLMs that use extremely demanding deep neural networks, BeamForge relies on a stochastic semantic graph coupled with a **Beam Search** algorithm.
+An experimental text generation engine written in Rust from scratch. Instead of neural networks, BeamForge uses a stochastic semantic graph paired with a Beam Search algorithm. The goal is to explore what you can get from classical probabilistic methods with fast native tokenization and online learning.
 
- 
-It is designed to be ultra-fast, lightweight in memory (thanks to its native tokenization), and capable of **continuous real-time learning** (Online Learning).
+---
 
+## How it works
 
-## Key Features
+**Tokenization**: Raw text is converted to `u32` identifiers. During generation the model works with integer arrays rather than strings, which keeps memory and CPU usage low.
 
-* **Native Tokenization (`u32`)**: Raw text is converted into numeric identifiers. During generation, the model clones arrays of integers (`Vec<u32>`) rather than strings, ensuring maximum CPU and RAM performance.
-* **Deep Thought (Beam Search)**: Instead of blindly choosing the next word (Greedy Search), the algorithm explores multiple scenarios in parallel (`BEAM_WIDTH = 5`) and keeps the sentence that makes the most sense globally.
-* **Length Penalty**: Scenario scores are normalized by their length, preventing the model from generating infinite sentences to artificially inflate its score.
-* **Live Online Learning**: Each declarative sentence typed by the user updates the synaptic weights in real-time.
-* **Binary Persistence**: Ultra-fast saving and loading of the "brain" via binary serialization (`bincode`).
+**Beam Search**: Rather than greedy next-token selection, the algorithm explores multiple candidate sequences in parallel (`BEAM_WIDTH = 5`) and picks the globally highest-scoring completion. Scores are normalized by length to prevent the model from padding endlessly.
 
-## Internal Architecture (Semantic Mesh)
+**Online learning**: Every declarative sentence typed by the user updates synaptic weights in real time. No training epochs, no restart.
 
-The brain (`SemanticMesh`) relies on 3 main learning structures:
+**Binary persistence**: The brain state saves and loads via `bincode`. Fast enough to use between sessions.
 
-1. **Synapses (Trigrams)**: Link a strict context of 2 words to a 3rd target word (`w1 + w2 -> target`).
-2. **Simple Links (Bigrams / Fallback)**: If the strict context is unknown, the model falls back on the probability of the previous word (`w2 -> target`).
-3. **Fast-Forward**: Allows skipping concepts to restart generation if the user input is too short.
+---
 
-## Installation & Usage
+## Internal architecture
 
-### 1. Prerequisites (Rust)
+The `SemanticMesh` brain uses three learning structures:
+
+1. **Trigrams (Synapses)**: `w1 + w2 -> target`. Strict two-word context to a third.
+2. **Bigrams (Fallback)**: `w2 -> target`. Used when the strict context is unknown.
+3. **Fast-Forward**: Skips concepts to restart generation when user input is too short to match.
+
+---
+
+## Building
+
+Requires Rust (stable).
+
 **Windows:**
+
 ```powershell
 winget install --id Rustlang.Rustup -e
 rustup default stable
 ```
+
 **Linux / macOS:**
+
 ```bash
 curl https://sh.rustup.rs -sSf | sh
 source "$HOME/.cargo/env"
 ```
 
-### 2. Execution
-From the root of the project, you can launch or compile the model as follows:
+**Run:**
 
-**Development Mode:**
-```powershell
+```bash
 cargo run --bin beamforge
 ```
 
-**Optimized Build (Release):**
-```powershell
+**Release build:**
+
+```bash
 cargo build --release --bin beamforge
-# The executable will be available in target/release/
+# target/release/beamforge
 ```
-
-## CLI Commands & Interaction
-
-Once the program is running, an interactive prompt `YOU >` appears.
-
-### Learning vs Generation Mode
-
-* **Learning**: If you type a normal sentence (e.g., `The sky is blue this morning.`), the model integrates it instantly into its synaptic weights.
-* **Generation**: If your sentence ends with a question mark `?` (e.g., `How is the sky ?`), the model launches the Beam Search and generates an answer (prefixed by `BEAMFORGE:`).
-
-### System Commands
-
-* `/train [folder]` : Scans a local folder and ingests all `.txt` and `.md` files to build a massive knowledge base quickly.
-* *Example:* `/train ./data/books`
-* `/save` : Compiles and saves the current state of the model to a `beamforge.brain` file.
-* `/load` : Reloads a previously saved brain.
-* `/quit` : Exits the program.
 
 ---
 
-*Project developed for algorithmic exploration of optimized stochastic chain language generation.*
+## Usage
+
+Once running, a `YOU >` prompt appears.
+
+- **Learning**: type a normal sentence. The model integrates it into its weights instantly.
+- **Generation**: end your input with `?`. The model runs Beam Search and prints a response prefixed with `BEAMFORGE:`.
+
+**Commands:**
+
+| Command | Effect |
+|---------|--------|
+| `/train [folder]` | Ingest all `.txt` and `.md` files in a folder |
+| `/save` | Save the current brain to `beamforge.brain` |
+| `/load` | Reload a previously saved brain |
+| `/quit` | Exit |
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=infinition%2FBeamForge&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=infinition/BeamForge&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=infinition/BeamForge&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=infinition/BeamForge&type=date&legend=top-left" />
+ </picture>
+</a>
+
+---
+
+## License
+
+MIT.
