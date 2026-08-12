@@ -1,3 +1,5 @@
+<img width="336" height="342" alt="image-removebg-preview" src="https://github.com/user-attachments/assets/77d2a834-c905-48b3-9d1f-80f9cc8344b5" />
+
 # BeamForge
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) ![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white) [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/infinition)
