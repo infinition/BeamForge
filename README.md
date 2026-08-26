@@ -1,4 +1,6 @@
-<img width="336" height="342" alt="image-removebg-preview" src="https://github.com/user-attachments/assets/77d2a834-c905-48b3-9d1f-80f9cc8344b5" />
+<p align="center">
+  <img src=".github/BeamForge.png" alt="BeamForge icon" width="336" height="342" />
+</p>
 
 # BeamForge
 
